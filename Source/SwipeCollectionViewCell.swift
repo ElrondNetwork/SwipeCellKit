@@ -80,7 +80,7 @@ open class SwipeCollectionViewCell: UICollectionViewCell {
     }
     
     func configure() {
-        contentView.clipsToBounds = false
+        clipsToBounds = false
         
         if contentView.translatesAutoresizingMaskIntoConstraints == true {
             contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +93,7 @@ open class SwipeCollectionViewCell: UICollectionViewCell {
             ])
         }
         
-        swipeController = SwipeController(swipeable: self, actionsContainerView: contentView)
+        swipeController = SwipeController(swipeable: self, actionsContainerView: self)
         swipeController.delegate = self
     }
     
@@ -156,7 +156,7 @@ open class SwipeCollectionViewCell: UICollectionViewCell {
     }
     
     func contains(point: CGPoint) -> Bool {
-        return frame.contains(point)
+        return point.y > frame.minY && point.y < frame.maxY
     }
     
     // Override hitTest(_:with:) here so that we can make sure our `actionsView` gets the touch event
@@ -192,7 +192,7 @@ open class SwipeCollectionViewCell: UICollectionViewCell {
     }
     
     func reset() {
-        contentView.clipsToBounds = false
+        clipsToBounds = false
         swipeController.reset()
         collectionView?.setGestureEnabled(true)
     }
