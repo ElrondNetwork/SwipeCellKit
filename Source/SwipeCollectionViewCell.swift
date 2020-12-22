@@ -156,7 +156,7 @@ open class SwipeCollectionViewCell: UICollectionViewCell {
     }
     
     func contains(point: CGPoint) -> Bool {
-        return point.y > frame.minY && point.y < frame.maxY
+        return frame.contains(point)
     }
     
     // Override hitTest(_:with:) here so that we can make sure our `actionsView` gets the touch event
